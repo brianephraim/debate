@@ -1,0 +1,13 @@
+{
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "master"
+  },
+  "packages": {
+    "blade": {},
+    "meteor-foundation": {
+      "git": "https://github.com/rubyblackbelt/meteor-foundation"
+    },
+    "moment": {}
+  }
+}

@@ -1,0 +1,43 @@
+div.sortFilterButtons
+ ul.button-group
+  li
+   a(class="small button latestdiscussion-button" href="#") latestdiscussion
+  li
+   a(class="small button latestresponses-button" href="#") latestresponses
+  li
+   a(class="small button latesttaunt-button" href="#") latesttaunt
+  li
+   a(class="small button sortOldestFirst-button" href="#") sortOldestFirst
+  li
+   a(class="small button sortNewestFirst-button" href="#") sortNewestFirst
+  li
+   a(class="small button resultsCount1-button" href="#") resultsCount1
+  li
+   a(class="small button resultsCount2-button" href="#") resultsCount2
+  li
+   a(class="small button resultsCount3-button" href="#") resultsCount3
+  li
+   a(class="small button resultsCount4-button" href="#") resultsCount4
+  li
+   a(class="small button resultsCount5-button" href="#") resultsCount5
+  li
+   a(class="small button page1-button" href="#") page1
+  li
+   a(class="small button page2-button" href="#") page2
+  li
+   a(class="small button page3-button" href="#") page3
+  li
+   a(class="small button page4-button" href="#") page4
+  li
+   a(class="small button page5-button" href="#") page5
+ p
+  strong Page: 
+  span #{Session.get('page')}, 
+  strong Results Count: 
+  span #{Session.get('resultsCount')}, 
+  strong Direction: 
+  span #{Session.get('sortDirection')}, 
+  strong Type: 
+  span #{Session.get('sortType')}
+  strong Total Taunts: 
+  span #{totalTauntsHelper}

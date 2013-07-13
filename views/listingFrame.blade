@@ -1,0 +1,12 @@
+.listingFrame
+ -var dataItemChatSegment = dataItem[dataItemSegmentKey]
+ .listing
+  foreach dataItemChatSegment as response
+   isolate
+    .panel.dataItem
+     .avatar
+      img(src="#{response.avatar}")
+     .colon :
+     p.bodyText #{response.bodyText}
+     .datePosted
+      call datePostedFromNow(response.datePosted)
