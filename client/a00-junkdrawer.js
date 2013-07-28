@@ -63,21 +63,6 @@ addTemplateHelper = function(template,helperName,fun){
   helpersForTemplates.push(arguments)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-//--------
-//EVENTS
-
-
 eventsForTemplates = []
 setTemplateEvents = function(fun){
   eventsForTemplates.push(arguments)

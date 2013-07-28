@@ -1,164 +1,52 @@
 
 
 
-
-returnSortProperty = function(sortType,sortDirection){
-
-  //return tauntColl.find({},{limit: n});
-  if(sortType === 'latesttaunt'){
-    sortType = 'taunt.datePosted'
-  }
-  var sortProperty = {};
-  sortProperty[sortType] = sortDirection;
-  //console.log(sortProperty)
-  return sortProperty;
+serverStartupItems = [];
+setServerStartupItems = function(fun){
+  serverStartupItems.push(arguments)
 }
+
+setServerStartupItems(function(){
   
+});
 
-Meteor.publish("taunts", function(page,resultsCount,sortDirection,sortType) {
- 	/**/
-  //This collection behaves interstingly.  It only repopulates the collection on the client...
-  //when the client changes call parameters.  So you can change an oldest-and-sorted property without...
-  //losing the rendered item's postion when it updates.  
-  var skipAmount = (page - 1) * resultsCount;
- 	var sortProperty = returnSortProperty(sortType,sortDirection)
-	var n = Number(resultsCount);
-
-  var resultArray = tauntColl.find({},{
-    sort: sortProperty,
-    limit: n,
-    skip: skipAmount
-  }).fetch()
-  var resultIdentifiers = [];
-  for(var i=0,l=resultArray.length; i<l; i++){
-    resultIdentifiers.push(resultArray[i]._id)
-  }
-
-
-  var pointer = tauntColl.find( { '_id': { $in: resultIdentifiers } }, {sort: sortProperty} )
-
-
-  return pointer
-  //return tauntColl.find( { '_id': { $in: resultIdentifiers } } )
+setServerStartupItems(function(){
+  //observe the taunt collection (adding and removal) in order to impace the tag collection
+  var extractTags = function() {
 
     
-});
-
-
-
-Meteor.publish("userData", function () {
-	return Meteor.users.find({_id: this.userId},
-		{fields: {'profile': 1}});
-});
-Meteor.publish("allUsers", function () {
-	//TODO: For testing only, remove this
-	return Meteor.users.find({}, {fields: {'profile': 1}});
-});
-
-
-
-
-
-//------------
-//------------
-
-Meteor.publishCounter = function(params) {
-  var collection, count, handle, id, init, pub,
-    _this = this;
-  count = 0;
-  init = true;
-  id = Random.id();
-  pub = params.handle;
-  collection = params.collection;
-  handle = collection.find(params.filter, params.options).observeChanges({
-    added: function() {
-      count++;
-      if (!init) {
-        return pub.changed(params.name, id, {
-          count: count
-        });
-      }
-    },
-    removed: function() {
-      count--;
-      if (!init) {
-        return pub.changed(params.name, id, {
-          count: count
-        });
-      }
-    }
-  });
-  init = false;
-  pub.added(params.name, id, {
-    count: count
-  });
-  pub.ready();
-  return pub.onStop(function() {
-    return handle.stop();
-  });
-};
-
-Meteor.publish('tauntCountDb', function(params) {
-  if (params == null) {
-    params = {};
-  }
-  return Meteor.publishCounter({
-    handle: this,
-    name: 'tauntCountDb',
-    collection: tauntColl,
-    filter: params
-  });
-});
-
-//---------
-//---------
-
-Meteor.extractTags = function() {
-
-  
-  tauntColl.find().observe({
-    _suppress_initial: true,
-    added: function(x,y) {
-      //FOR SOME REASON IT ALWAYS FIRES TWICE.
-        for(var i = 0, l=x.taunt.tags.length; i<l; i++){
-          if(x.taunt.tags[i].length > 0){
-            var asdf = tagsColl.find({tag:x.taunt.tags[i]}).fetch()[0];
-            if(typeof asdf === 'undefined'){
-              tagsColl.insert({
-                tag:x.taunt.tags[i],
-                popularityTally:1
-              });
-            } else {
-              tagsColl.update(
-                {tag:x.taunt.tags[i]},
-                {$inc:{popularityTally:1}}
-              )
+    tauntColl.find().observe({
+      _suppress_initial: true,
+      added: function(x,y) {
+          for(var i = 0, l=x.taunt.tags.length; i<l; i++){
+            if(x.taunt.tags[i].length > 0){
+              var asdf = tagsColl.find({tag:x.taunt.tags[i]}).fetch()[0];
+              if(typeof asdf === 'undefined'){
+                tagsColl.insert({
+                  tag:x.taunt.tags[i],
+                  popularityTally:1
+                });
+              } else {
+                tagsColl.update(
+                  {tag:x.taunt.tags[i]},
+                  {$inc:{popularityTally:1}}
+                )
+              }
             }
           }
-        }
-      
-      
-    },
-    removed: function() {
-      return tagsColl.find({});
-    }
-  }); 
-};
-
-Meteor.publish('tagsDb', function(params) {
-  if (params == null) {
-    params = {};
-  }
-  //return Meteor.extractTags();
-  return tagsColl.find({});
+        
+        
+      },
+      removed: function() {
+        return tagsColl.find({});
+      }
+    }); 
+  };
+  extractTags();
 });
 
-
-
-
-
-Meteor.startup(function () {
-  Meteor.extractTags();
+setServerStartupItems(function(){
+  //observe the creation of a user in order to get a snapshot of their profile info.
   Accounts.onCreateUser(function(options, user) {
     if (options.profile) {
         options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
@@ -167,8 +55,10 @@ Meteor.startup(function () {
     }
     return user;
   });
+});
 
-
+setServerStartupItems(function(){
+  //Default data into the taunt collection if it's a brand new database (for testing)
   if (tauntColl.find().count() === 0) {
      var data = [
         {
@@ -250,10 +140,10 @@ Meteor.startup(function () {
         tauntColl.insert(data[i]);
      }
   }
+});
 
-
-
-
+setServerStartupItems(function(){
+  //Set permissions and define how to identify an admin.
   function adminUser(userId) {
     console.log(userId, userId === 'fPgLK48zrcm4GPXAi')
     var adminUser = Meteor.users.findOne({username:"asdf"});
@@ -274,6 +164,25 @@ Meteor.startup(function () {
       });
     }
   });
+});
+
+
+
+
+Meteor.startup(function () {
+  for(var i=0,l=serverStartupItems.length; i<l; i++){
+    var args = serverStartupItems[i];
+    args[0]();
+  }
+  
+
+
+  
+
+
+
+
+  
 
 
 
