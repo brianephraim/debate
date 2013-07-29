@@ -1,3 +1,8 @@
+addTemplateHelper('sortFilterButtons','asdfasdf',function() {
+  
+  return function(){alert('asdf')}
+})
+
 setTemplateEvents('sortFilterButtons',{
   "click a": function (e, tmpl, x) {
     var $el = $(e.target)

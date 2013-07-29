@@ -1,15 +1,27 @@
+p #{asdfasdf}
 div.sortFilterButtons
+ h3 Sort by
  ul.button-group
-  li
-   a(class="small button latestdiscussion-button" href="#") latestdiscussion
-  li
-   a(class="small button latestresponses-button" href="#") latestresponses
-  li
-   a(class="small button latesttaunt-button" href="#") latesttaunt
+  - var sorts = [];
+  - sorts.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
+  - sorts.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
+  - sorts.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
+  foreach sorts as sort
+   - console.log(sort.match , Session.get('sortType'))
+   - var selectedClass = ''
+   - if(sort.match === Session.get('sortType')){
+    - selectedClass = 'success'
+   - } 
+   li
+    a(class="small button #{sort.class} #{selectedClass}") #{sort.label}
+ h3 Sort direction
+ ul.button-group
   li
    a(class="small button sortOldestFirst-button" href="#") sortOldestFirst
   li
    a(class="small button sortNewestFirst-button" href="#") sortNewestFirst
+ h3 Results per page
+ ul.button-group
   li
    a(class="small button resultsCount1-button" href="#") resultsCount1
   li
@@ -20,6 +32,8 @@ div.sortFilterButtons
    a(class="small button resultsCount4-button" href="#") resultsCount4
   li
    a(class="small button resultsCount5-button" href="#") resultsCount5
+ h3 Page number
+ ul.button-group
   li
    a(class="small button page1-button" href="#") page1
   li
