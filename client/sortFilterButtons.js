@@ -1,7 +1,4 @@
-addTemplateHelper('sortFilterButtons','asdfasdf',function() {
-  
-  return function(){alert('asdf')}
-})
+
 
 setTemplateEvents('sortFilterButtons',{
   "click a": function (e, tmpl, x) {
@@ -21,20 +18,11 @@ setTemplateEvents('sortFilterButtons',{
     if($el.hasClass('sortOldestFirst-button')){
       Session.set('sortDirection', 1);
     }
-    if($el.hasClass('resultsCount1-button')){
-      Session.set('resultsCount', 1);
+    if($el.hasClass('resultsCount-button')){
+      Session.set('resultsCount', this.match);
     }
-    if($el.hasClass('resultsCount2-button')){
-      Session.set('resultsCount', 2);
-    }
-    if($el.hasClass('resultsCount3-button')){
-      Session.set('resultsCount', 3);
-    }
-    if($el.hasClass('resultsCount4-button')){
-      Session.set('resultsCount', 4);
-    }
-    if($el.hasClass('resultsCount5-button')){
-      Session.set('resultsCount', 5);
+    if($el.hasClass('page-button')){
+      Session.set('page', this.match);
     }
 
     if($el.hasClass('page1-button')){

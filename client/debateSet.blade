@@ -1,6 +1,7 @@
 function datePostedFromNow(dateObj)
  -var count = Session.get("timeCounter")
- -var fromNowSting = moment(dateObj).fromNow();
+ -var aMoment = moment(dateObj)
+ -var fromNowSting = aMoment.fromNow() + ', ' +aMoment.calendar()
  span #{fromNowSting}
 -var datePostedFromNow = '';
 .debateItem.row
