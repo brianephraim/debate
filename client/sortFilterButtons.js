@@ -1,6 +1,25 @@
-
-
 setTemplateEvents('sortFilterButtons',{
+  "click .tagYes": function (e, tmpl, x) {
+    var tag = this.tag;
+    var checked = $(e.target).attr('checked')
+    var currentSession = Session.get('tagsIncludeArray')
+    var indexOfTag = currentSession.indexOf(this.tag)
+    if(typeof checked !== 'undefined' && checked === 'checked'){
+      console.log('CHECKED!')
+      if(indexOfTag === -1){
+        currentSession.push(tag)
+        Session.set('tagsIncludeArray', currentSession);
+      }
+      //
+    } else {
+
+      console.log('NOT CHECKED!')
+      currentSession.splice(indexOfTag,1)
+      Session.set('tagsIncludeArray',currentSession);
+    }
+
+
+  },
   "click a": function (e, tmpl, x) {
     var $el = $(e.target)
     if($el.hasClass('latestdiscussion-button')){
@@ -20,6 +39,21 @@ setTemplateEvents('sortFilterButtons',{
     }
     if($el.hasClass('resultsCount-button')){
       Session.set('resultsCount', this.match);
+
+
+
+      var pages = Math.floor(Session.get('totalTaunts')/Session.get('resultsCount'))
+      var remainder = Session.get('totalTaunts')%Session.get('resultsCount')
+      remainder = remainder > 0 ? 1 : 0;
+      pages += remainder;
+      Session.set('totalPages',pages)
+
+      //If changing result count makes the current page disappear, set current page to last page.
+      if(Session.get('page') > Session.get('totalPages')){
+        Session.set('page',Session.get('totalPages'))
+      }
+
+
     }
     if($el.hasClass('page-button')){
       Session.set('page', this.match);

@@ -1,4 +1,9 @@
-Meteor.publish("taunts", function(page,resultsCount,sortDirection,sortType) {
+Meteor.publish("taunts", function(page,resultsCount,sortDirection,sortType,tagsIncludeArray) {
+  console.log(tagsIncludeArray.length)
+  var findCriteria = {}
+  if(tagsIncludeArray.length > 0){
+    findCriteria = {'taunt.tags':{$in:tagsIncludeArray}}
+  }
   /**/
   //This collection behaves interstingly.  It only repopulates the collection on the client...
   //when the client changes call parameters.  So you can change an oldest-and-sorted property without...
@@ -16,7 +21,8 @@ Meteor.publish("taunts", function(page,resultsCount,sortDirection,sortType) {
  	var sortProperty = returnSortProperty(sortType,sortDirection)
 	var n = Number(resultsCount);
 
-  var resultArray = tauntColl.find({},{
+  //var resultArray = tauntColl.find({'taunt.tags':tagsIncludeArray[0]},{
+  var resultArray = tauntColl.find(findCriteria,{
     sort: sortProperty,
     limit: n,
     skip: skipAmount

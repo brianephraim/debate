@@ -1,13 +1,23 @@
 if(typeof Session.get('asdf') === 'undefined'){
-  Session.set('resultsCount', 1);
+  Session.set('resultsCount', 5);
+
+
+
+
   Session.set('page', 1);
 }
 if(typeof Session.get('sortDirection') === 'undefined'){
-  Session.set('sortDirection', 1);
+  Session.set('sortDirection', -1);
 }
 if(typeof Session.get('sortType') === 'undefined'){
-  Session.set('sortType', 'latestdiscussion');
+  Session.set('sortType', 'latesttaunt');
 }
-Session.set('totalTaunts', '0');
+if(typeof Session.get('tagsIncludeArray') === 'undefined'){
+  Session.set('tagsIncludeArray', []);
+}
+
+
+Session.set('totalTaunts', 0);
+Session.set('totalPages',0)
 
 

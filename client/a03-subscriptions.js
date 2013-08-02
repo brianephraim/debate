@@ -3,7 +3,8 @@ Meteor.autosubscribe(function () {
     Session.get('page'),
     Session.get('resultsCount'),
     Session.get('sortDirection'),
-    Session.get('sortType')      
+    Session.get('sortType'),
+    Session.get('tagsIncludeArray')
   );
 
   Meteor.subscribe('allUsers',null , function() { 

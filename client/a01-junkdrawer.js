@@ -1,9 +1,5 @@
 
 
-
-
-
-
 helpersForTemplates = []
 addTemplateHelper = function(template,helperName,fun){
   helpersForTemplates.push(arguments)
@@ -26,6 +22,7 @@ Meteor.startup(function () {
     var args = eventsForTemplates[i];
     Template[args[0]].events(args[1]);
   }
+
 
   
   return (function(){
