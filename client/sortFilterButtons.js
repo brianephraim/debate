@@ -1,21 +1,26 @@
 setTemplateEvents('sortFilterButtons',{
   "click .tagYes": function (e, tmpl, x) {
-    var tag = this.tag;
-    var checked = $(e.target).attr('checked')
-    var currentSession = Session.get('tagsIncludeArray')
-    var indexOfTag = currentSession.indexOf(this.tag)
-    if(typeof checked !== 'undefined' && checked === 'checked'){
-      console.log('CHECKED!')
-      if(indexOfTag === -1){
-        currentSession.push(tag)
-        Session.set('tagsIncludeArray', currentSession);
-      }
-      //
-    } else {
+    //.tagCloud
+    var $el = $(e.target);
+    if($el.closest('.tagCloud').length > 0){
+    
+      var tag = this.match.tag;
+      var checked = $el.attr('checked')
+      var currentSession = Session.get('tagsIncludeArray')
+      var indexOfTag = currentSession.indexOf(this.tag)
+      if(typeof checked !== 'undefined' && checked === 'checked'){
+        console.log('CHECKED!')
+        if(indexOfTag === -1){
+          currentSession.push(tag)
+          Session.set('tagsIncludeArray', currentSession);
+        }
+        //
+      } else {
 
-      console.log('NOT CHECKED!')
-      currentSession.splice(indexOfTag,1)
-      Session.set('tagsIncludeArray',currentSession);
+        console.log('NOT CHECKED!')
+        currentSession.splice(indexOfTag,1)
+        Session.set('tagsIncludeArray',currentSession);
+      }
     }
 
 

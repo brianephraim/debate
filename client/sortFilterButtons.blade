@@ -1,69 +1,89 @@
-function sortEtc(toGet,sorts,smallSize,largeSize,extraClass,groupClass)
+function sortEtc(toGet,buttonGroupArray,smallSize,largeSize,extraClass,groupClass,headlineString)
  - var groupClassx = groupClass
+ h3 #{headlineString}
  div(class="bladeEmptyClassBug #{groupClassx}")
   div.button-group
-   foreach sorts as sort
-    - var selectedClass = ''
-    - if(sort.match === Session.get(toGet)){
-     - selectedClass = 'success'
-    - } 
+   foreach buttonGroupArray as sort
     div(class="small-#{smallSize} large-#{largeSize} #{extraClass}")
-     a(class="expand small button #{sort.class} #{selectedClass}") #{sort.label}
+     -if(groupClass.indexOf('tagCloud') > -1){
+      .columns
+       .row #{sort.label}
+       .row
+        input(class="tagYes" type="checkbox")
+        input(class="tagNo" type="checkbox")
+     -} else {
+      - var selectedClass = ''
+      - if(sort.match === Session.get(toGet)){
+       - selectedClass = 'success'
+      - }
+      a(class="expand small button #{sort.class} #{selectedClass}") #{sort.label}
+     -}
 .xpanel
  div.sortFilterButtons
   
   h2 tagslist
-  div.count
-   div.panel
-    div.button-group
-     foreach tagsHelper as atag
-      .columns.left.small-1
-       div(class="small button round expand tagsInclude-button") #{atag.tag}(#{atag.popularityTally})
-        input(class="tagYes" type="checkbox")
-        input(class="tagNo" type="checkbox")
+  .row
+   .small-3.columns
+   .small-9.columns
+    - var buttonGroupArray = []
+    - var total = tagsHelper.length;
+    - for(var i=0,l=total; i<l; i++){
+     - buttonGroupArray.push({label:tagsHelper[i].tag + ' ' + tagsHelper[i].popularityTally,class:'tagsInclude-button',match:tagsHelper[i]})
+    - }
+    call sortEtc('resultsCount',buttonGroupArray,1,1,'left no-margin','panel tagCloud','Results per page')
+
+  .row
+   .small-3.columns
+   .small-9.columns
+    - var buttonGroupArray = []
+    - var total = totalTauntsHelper;
+    - for(var i=1,l=total; i<=l; i++){
+     - buttonGroupArray.push({label:i,class:'resultsCount-button',match:i})
+    - }
+    call sortEtc('resultsCount',buttonGroupArray,1,1,'left no-margin','panel','Results per page')
 
 
-  h3 Results per page
-  - var sorts = []
-  - var total = totalTauntsHelper;
-  - for(var i=1,l=total; i<=l; i++){
-   - sorts.push({label:i,class:'resultsCount-button',match:i})
-  - }
-  call sortEtc('resultsCount',sorts,1,1,'left no-margin','panel')
+  .row
+   .small-3.columns
+   .small-9.columns
+    - var buttonGroupArray = []
+    - var pages = Math.floor(totalTauntsHelper/Session.get('resultsCount'))
+    - var remainder = totalTauntsHelper%Session.get('resultsCount')
+    - remainder = remainder > 0 ? 1 : 0;
+    - pages += remainder;
+    - for(var i=1,l=pages; i<=l; i++){
+     - buttonGroupArray.push({label:i,class:'page-button',match:i})
+    - }
+    call sortEtc('page',buttonGroupArray,1,1,'left no-margin','panel','Page number')
   
-  h3 Page number
-  - var sorts = []
-  - var pages = Math.floor(totalTauntsHelper/Session.get('resultsCount'))
-  - var remainder = totalTauntsHelper%Session.get('resultsCount')
-  - remainder = remainder > 0 ? 1 : 0;
-  - pages += remainder;
-  - for(var i=1,l=pages; i<=l; i++){
-   - sorts.push({label:i,class:'page-button',match:i})
-  - }
-  call sortEtc('page',sorts,1,1,'left no-margin','panel')
-  
-  p
-   strong Page: 
-   span #{Session.get('page')}, 
-   strong Results Count: 
-   span #{Session.get('resultsCount')}, 
-   strong Direction: 
-   span #{Session.get('sortDirection')}, 
-   strong Type: 
-   span #{Session.get('sortType')}
-   strong Total Taunts: 
-   span #{totalTauntsHelper}
-.row
- .xpanel
-  h3 Sort direction
-  - var sorts = [];
-  - sorts.push({label:'newest',class:'sortNewestFirst-button',match:-1})
-  - sorts.push({label:'oldest',class:'sortOldestFirst-button',match:1})
-  call sortEtc('sortDirection',sorts,6,6,'columns','')
+  .row
+   .small-3.columns
+   .small-9.columns
+    strong Page: 
+    span #{Session.get('page')}, 
+    strong Results Count: 
+    span #{Session.get('resultsCount')}, 
+    strong Direction: 
+    span #{Session.get('sortDirection')}, 
+    strong Type: 
+    span #{Session.get('sortType')}
+    strong Total Taunts: 
+    span #{totalTauntsHelper}
 
-  h3 Sort by
-  - var sorts = [];
-  - sorts.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
-  - sorts.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
-  - sorts.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
-  call sortEtc('sortType',sorts,6,4,'columns','')
+
+  .row
+   .small-3.columns
+   .small-9.columns
+    - var buttonGroupArray = [];
+    - buttonGroupArray.push({label:'newest',class:'sortNewestFirst-button',match:-1})
+    - buttonGroupArray.push({label:'oldest',class:'sortOldestFirst-button',match:1})
+    call sortEtc('sortDirection',buttonGroupArray,6,6,'columns','','Sort direction')
+
+  .row
+   .small-3.columns
+   .small-9.columns
+    - var buttonGroupArray = [];
+    - buttonGroupArray.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
+    - buttonGroupArray.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
+    - buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
+    call sortEtc('sortType',buttonGroupArray,6,4,'columns','','Sort by')
