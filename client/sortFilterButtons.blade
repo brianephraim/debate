@@ -1,4 +1,4 @@
-function sortEtc(toGet,buttonGroupArray,smallSize,largeSize,extraClass,groupClass,headlineString)
+function renderButtonGroupManipulators(toGet,buttonGroupArray,smallSize,largeSize,extraClass,groupClass,headlineString)
  - var groupClassx = groupClass
  h3 #{headlineString}
  div(class="bladeEmptyClassBug #{groupClassx}")
@@ -18,72 +18,70 @@ function sortEtc(toGet,buttonGroupArray,smallSize,largeSize,extraClass,groupClas
       - }
       a(class="expand small button #{sort.class} #{selectedClass}") #{sort.label}
      -}
-.xpanel
- div.sortFilterButtons
-  
-  h2 tagslist
-  .row
-   .small-3.columns
-   .small-9.columns
-    - var buttonGroupArray = []
-    - var total = tagsHelper.length;
-    - for(var i=0,l=total; i<l; i++){
-     - buttonGroupArray.push({label:tagsHelper[i].tag + ' ' + tagsHelper[i].popularityTally,class:'tagsInclude-button',match:tagsHelper[i]})
-    - }
-    call sortEtc('resultsCount',buttonGroupArray,1,1,'left no-margin','panel tagCloud','Results per page')
+.xpanel  
+ .row
+  .small-3.columns
+  .small-9.columns
+   - var buttonGroupArray = []
+   - var total = tagsHelper.length;
+   - for(var i=0,l=total; i<l; i++){
+    - buttonGroupArray.push({label:tagsHelper[i].tag + ' ' + tagsHelper[i].popularityTally,class:'tagsInclude-button',match:tagsHelper[i]})
+   - }
+   - var asdf = {}
+   call renderButtonGroupManipulators('resultsCount',buttonGroupArray,1,1,'left no-margin','panel tagCloud','tag cloud')
 
-  .row
-   .small-3.columns
-   .small-9.columns
-    - var buttonGroupArray = []
-    - var total = totalTauntsHelper;
-    - for(var i=1,l=total; i<=l; i++){
-     - buttonGroupArray.push({label:i,class:'resultsCount-button',match:i})
-    - }
-    call sortEtc('resultsCount',buttonGroupArray,1,1,'left no-margin','panel','Results per page')
+ .row
+  .small-3.columns
+  .small-9.columns
+   - var buttonGroupArray = []
+   - var total = totalTauntsHelper;
+   - for(var i=1,l=total; i<=l; i++){
+    - buttonGroupArray.push({label:i,class:'resultsCount-button',match:i})
+   - }
+   call renderButtonGroupManipulators('resultsCount',buttonGroupArray,1,1,'left no-margin','panel','Results per page')
 
 
-  .row
-   .small-3.columns
-   .small-9.columns
-    - var buttonGroupArray = []
-    - var pages = Math.floor(totalTauntsHelper/Session.get('resultsCount'))
-    - var remainder = totalTauntsHelper%Session.get('resultsCount')
-    - remainder = remainder > 0 ? 1 : 0;
-    - pages += remainder;
-    - for(var i=1,l=pages; i<=l; i++){
-     - buttonGroupArray.push({label:i,class:'page-button',match:i})
-    - }
-    call sortEtc('page',buttonGroupArray,1,1,'left no-margin','panel','Page number')
-  
-  .row
-   .small-3.columns
-   .small-9.columns
-    strong Page: 
-    span #{Session.get('page')}, 
-    strong Results Count: 
-    span #{Session.get('resultsCount')}, 
-    strong Direction: 
-    span #{Session.get('sortDirection')}, 
-    strong Type: 
-    span #{Session.get('sortType')}
-    strong Total Taunts: 
-    span #{totalTauntsHelper}
+ .row
+  .small-3.columns
+  .small-9.columns
+   - var buttonGroupArray = []
+   - var pages = Math.floor(totalTauntsHelper/Session.get('resultsCount'))
+   - var remainder = totalTauntsHelper%Session.get('resultsCount')
+   - remainder = remainder > 0 ? 1 : 0;
+   - pages += remainder;
+   - for(var i=1,l=pages; i<=l; i++){
+    - buttonGroupArray.push({label:i,class:'page-button',match:i})
+   - }
+   call renderButtonGroupManipulators('page',buttonGroupArray,1,1,'left no-margin','panel','Page number')
+ 
+ .row
+  .small-3.columns
+  .small-9.columns
+   strong Page: 
+   span #{Session.get('page')}, 
+   strong Results Count: 
+   span #{Session.get('resultsCount')}, 
+   strong Direction: 
+   span #{Session.get('sortDirection')}, 
+   strong Type: 
+   span #{Session.get('sortType')}
+   strong Total Taunts: 
+   span #{totalTauntsHelper}
 
 
-  .row
-   .small-3.columns
-   .small-9.columns
-    - var buttonGroupArray = [];
-    - buttonGroupArray.push({label:'newest',class:'sortNewestFirst-button',match:-1})
-    - buttonGroupArray.push({label:'oldest',class:'sortOldestFirst-button',match:1})
-    call sortEtc('sortDirection',buttonGroupArray,6,6,'columns','','Sort direction')
+ .row
+  .small-3.columns
+  .small-9.columns
+   - var buttonGroupArray = [];
+   - buttonGroupArray.push({label:'newest',class:'sortNewestFirst-button',match:-1})
+   - buttonGroupArray.push({label:'oldest',class:'sortOldestFirst-button',match:1})
+   call renderButtonGroupManipulators('sortDirection',buttonGroupArray,6,6,'columns','','Sort direction')
 
-  .row
-   .small-3.columns
-   .small-9.columns
-    - var buttonGroupArray = [];
-    - buttonGroupArray.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
-    - buttonGroupArray.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
-    - buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
-    call sortEtc('sortType',buttonGroupArray,6,4,'columns','','Sort by')
+ .row
+  .small-3.columns
+  .small-9.columns
+   - var buttonGroupArray = [];
+   - buttonGroupArray.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
+   - buttonGroupArray.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
+   - buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
+   call renderButtonGroupManipulators('sortType',buttonGroupArray,6,4,'columns','','Sort by')
