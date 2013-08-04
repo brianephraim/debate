@@ -1,54 +1,34 @@
-function renderButtonGroupManipulators(toGet,buttonGroupArray,smallSize,largeSize,extraClass,groupClass,headlineString)
- - var groupClassx = groupClass
+- var ddddddd= 'ddddddd'
+function renderButtonGroupManipulators(settings)
  .row
   .small-1.columns
-   label #{headlineString}
+   label #{settings.headlineString}
   .small-11.columns
-   div(class="bladeEmptyClassBug #{groupClassx}")
+   div(class="bladeEmptyClassBug #{settings.groupClass}")
     div.button-group
-     foreach buttonGroupArray as sort
-      div(class="small-#{smallSize} large-#{largeSize} #{extraClass}")
-       -if(groupClass.indexOf('tagCloud') > -1){
+     foreach settings.buttonGroupArray as buttonGroupItem
+      div(class="small-#{settings.smallSize} large-#{settings.largeSize} #{settings.itemClass}")
+       -if(settings.groupClass.indexOf('tagCloud') > -1){
         .columns
-         .row #{sort.label}
+         .row #{buttonGroupItem.label}
          .row
           input(class="tagYes tagCheckbox" type="checkbox")
           input(class="tagNo tagCheckbox" type="checkbox")
        -} else {
         - var selectedClass = ''
-        - if(sort.match === Session.get(toGet)){
+        - if(buttonGroupItem.match === Session.get(settings.toGet)){
          - selectedClass = 'success'
         - }
-        a(class="expand small button #{sort.class} #{selectedClass}") #{sort.label}
+        a(class="expand small button #{buttonGroupItem.class} #{selectedClass}") #{buttonGroupItem.label}
        -}
 
-- var buttonGroupArray = []
-- var total = tagsHelper.length;
-- for(var i=0,l=total; i<l; i++){
- - buttonGroupArray.push({label:tagsHelper[i].tag + ' ' + tagsHelper[i].popularityTally,class:'tagsInclude-button',match:tagsHelper[i]})
-- }
-- var asdf = {}
-call renderButtonGroupManipulators('resultsCount',buttonGroupArray,1,1,'left no-margin','panel tagCloud','tag cloud')
+- asdfasdf()
 
+call renderButtonGroupManipulators(tagsCloudDataHelper)
 
-- var buttonGroupArray = []
-- var total = totalTauntsHelper;
-- for(var i=1,l=total; i<=l; i++){
- - buttonGroupArray.push({label:i,class:'resultsCount-button',match:i})
-- }
-call renderButtonGroupManipulators('resultsCount',buttonGroupArray,1,1,'left no-margin','panel','Results per page')
+call renderButtonGroupManipulators(resultsCountDataHelper)
 
-
-
-- var buttonGroupArray = []
-- var pages = Math.floor(totalTauntsHelper/Session.get('resultsCount'))
-- var remainder = totalTauntsHelper%Session.get('resultsCount')
-- remainder = remainder > 0 ? 1 : 0;
-- pages += remainder;
-- for(var i=1,l=pages; i<=l; i++){
- - buttonGroupArray.push({label:i,class:'page-button',match:i})
-- }
-call renderButtonGroupManipulators('page',buttonGroupArray,1,1,'left no-margin','panel','Page number')
+call renderButtonGroupManipulators(pageNumberDataHelper)
 
 .row
  .small-3.columns
@@ -66,14 +46,6 @@ call renderButtonGroupManipulators('page',buttonGroupArray,1,1,'left no-margin',
 
 
 
-- var buttonGroupArray = [];
-- buttonGroupArray.push({label:'newest',class:'sortNewestFirst-button',match:-1})
-- buttonGroupArray.push({label:'oldest',class:'sortOldestFirst-button',match:1})
-call renderButtonGroupManipulators('sortDirection',buttonGroupArray,6,6,'columns','','Sort direction')
+call renderButtonGroupManipulators(sortDirectionDataHelper)
 
-
-- var buttonGroupArray = [];
-- buttonGroupArray.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
-- buttonGroupArray.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
-- buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
-call renderButtonGroupManipulators('sortType',buttonGroupArray,6,4,'columns','','Sort by')
+call renderButtonGroupManipulators(sortTypeDataHelper)

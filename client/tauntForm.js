@@ -3,7 +3,10 @@ addTemplateHelper('tauntForm','rendered',function(e) {
   var $frame = $(self.lastNode);
   if(typeof this.alreadyRendered === 'undefined'){
     this.alreadyRendered = true;
-    $frame.find('.tagsInput').tagsInput({width:'auto'});
+    $frame.find('.tagsInput').tagsInput({
+      width:'auto',
+      height:'auto'
+    });
   } 
 })
 

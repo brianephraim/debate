@@ -1,35 +1,17 @@
 .rootViewWrapperDebate
- //-var asdf = 'blank';
- //-if(typeof qwer !== 'undefined')
-  //-asdf = qwer.count
- //-console.log(asdf)
- //p #{asdf}
  != Template.loginTemplate({"optional_data_object":"goes here"})
- .row
-  .large-12.columns
-   .header.row
-    .small-12.large-12.columns
+ .mainContent.row.fixedHeader
+  .small-12.large-12.columns
+   .row
+    constant
      .panel
-      h1 boomer.com
-   .mainContent.row
-    .small-12.large-12.columns
-     .row
-      isolate
-       .tagnav.small-6.large-6.columns
-        .panel
-         .sidenav
-          include 'tagsList'
-      constant
-       .tagnav.small-6.large-6.columns
-        .panel
-         include 'tauntForm'
-   .mainContent.row
-    isolate
-     include 'sortFilterButtons'
-   .mainContent.row
-    isolate
-     include 'tauntList'
-   .footer.row
-    .small-12.large-12.columns
-     .panel
-      h4 boomer.com
+      include 'tauntForm'
+  isolate
+   include 'sortFilterButtons'
+ .mainContent.row
+  isolate
+   include 'tauntList'
+ .footer.row
+  .small-12.large-12.columns
+   .panel
+    h4 boomer.com

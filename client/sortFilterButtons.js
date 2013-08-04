@@ -1,3 +1,139 @@
+addTemplateHelper('rootView','tagsCloudDataHelper',function(){
+  var tagsArray = Template.rootView.tagsHelper();
+  var buttonGroupArray = []
+  var total = tagsArray.length;
+  for(var i=0,l=total; i<l; i++){
+    buttonGroupArray.push({label:tagsArray[i].tag + ' ' + tagsArray[i].popularityTally,class:'tagsInclude-button',match:tagsArray[i]})
+  }
+  var dataForHelper = {
+    toGet:'resultsCount',
+    buttonGroupArray:buttonGroupArray,
+    smallSize:1,
+    largeSize:1,
+    itemClass:'left no-margin',
+    groupClass:'panel tagCloud',
+    headlineString:'tag cloud'
+  }
+
+  return dataForHelper;
+})
+
+
+
+addTemplateHelper('rootView','resultsCountDataHelper',function(){
+  var buttonGroupArray = []
+  var total = Template.rootView.totalTauntsHelper();
+  for(var i=1,l=total; i<=l; i++){
+   buttonGroupArray.push({label:i,class:'resultsCount-button',match:i})
+  }
+
+  var dataForHelper = {
+    toGet:'resultsCount',
+    buttonGroupArray:buttonGroupArray,
+    smallSize:1,
+    largeSize:1,
+    itemClass:'left no-margin',
+    groupClass:'panel',
+    headlineString:'Results per page'
+  }
+
+
+
+  return dataForHelper;
+
+})
+
+
+addTemplateHelper('rootView','pageNumberDataHelper',function(){
+  var buttonGroupArray = []
+  var totalTaunts = Template.rootView.totalTauntsHelper();
+  var pages = Math.floor(totalTaunts/Session.get('resultsCount'))
+  var remainder = totalTaunts%Session.get('resultsCount')
+  remainder = remainder > 0 ? 1 : 0;
+  pages += remainder;
+  for(var i=1,l=pages; i<=l; i++){
+   buttonGroupArray.push({label:i,class:'page-button',match:i})
+  }
+
+
+  var dataForHelper = {
+    toGet:'page',
+    buttonGroupArray:buttonGroupArray,
+    smallSize:1,
+    largeSize:1,
+    itemClass:'left no-margin',
+    groupClass:'panel',
+    headlineString:'Page number'
+  }
+
+
+
+  return dataForHelper;
+
+})
+
+
+
+addTemplateHelper('rootView','sortDirectionDataHelper',function(){
+  var buttonGroupArray = [];
+  buttonGroupArray.push({label:'newest',class:'sortNewestFirst-button',match:-1})
+  buttonGroupArray.push({label:'oldest',class:'sortOldestFirst-button',match:1})
+
+
+
+  var dataForHelper = {
+    toGet:'sortDirection',
+    buttonGroupArray:buttonGroupArray,
+    smallSize:6,
+    largeSize:6,
+    itemClass:'columns',
+    groupClass:'',
+    headlineString:'Sort direction'
+  }
+
+
+
+  return dataForHelper;
+
+})
+
+
+
+addTemplateHelper('rootView','sortTypeDataHelper',function(){
+  var buttonGroupArray = [];
+  buttonGroupArray.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
+  buttonGroupArray.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
+  buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
+
+
+  var dataForHelper = {
+    toGet:'sortType',
+    buttonGroupArray:buttonGroupArray,
+    smallSize:6,
+    largeSize:4,
+    itemClass:'columns',
+    groupClass:'',
+    headlineString:'Sort by'
+  }
+
+
+
+  return dataForHelper;
+
+})
+
+addTemplateHelper('rootView','asdfasdf',function(){
+
+
+
+  return function(){console.log('asdfasdfasdf')};
+
+})
+
+
+
+
+
 setTemplateEvents('sortFilterButtons',{
   "click .tagCheckbox": function (e, tmpl, x) {
     //.tagCloud
