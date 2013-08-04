@@ -5,7 +5,9 @@ Meteor.autosubscribe(function () {
     Session.get('sortDirection'),
     Session.get('sortType'),
     Session.get('tagsIncludeArray'),
-    Session.get('tagsExcludeArray')
+    Session.get('tagsExcludeArray'), function(x,y,z){
+      console.log('taunt list updated callback')
+    }
   );
 
   Meteor.subscribe('allUsers',null , function() { 

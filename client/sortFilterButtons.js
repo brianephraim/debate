@@ -189,7 +189,7 @@ setTemplateEvents('sortFilterButtons',{
     if($el.hasClass('resultsCount-button')){
 
       
-
+      
       Session.set('resultsCount', this.match);
 
 

@@ -1,3 +1,10 @@
+
+
+if(typeof Session.get('listRefresh') === 'undefined'){
+  Session.set('listRefresh', {});
+}
+
+
 if(typeof Session.get('asdf') === 'undefined'){
   Session.set('resultsCount', 5);
 
