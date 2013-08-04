@@ -6,7 +6,9 @@ function renderButtonGroupManipulators(settings)
   .small-11.columns
    div(class="bladeEmptyClassBug #{settings.groupClass}")
     div.button-group
+     - var parent = this;
      foreach settings.buttonGroupArray as buttonGroupItem
+      - this.parent = parent;
       div(class="small-#{settings.smallSize} large-#{settings.largeSize} #{settings.itemClass}")
        -if(settings.groupClass.indexOf('tagCloud') > -1){
         .columns
@@ -18,11 +20,11 @@ function renderButtonGroupManipulators(settings)
         - var selectedClass = ''
         - if(buttonGroupItem.match === Session.get(settings.toGet)){
          - selectedClass = 'success'
+         - this.parent.selected = this;
         - }
         a(class="expand small button #{buttonGroupItem.class} #{selectedClass}") #{buttonGroupItem.label}
        -}
 
-- asdfasdf()
 
 call renderButtonGroupManipulators(tagsCloudDataHelper)
 

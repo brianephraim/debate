@@ -101,9 +101,9 @@ addTemplateHelper('rootView','sortDirectionDataHelper',function(){
 
 addTemplateHelper('rootView','sortTypeDataHelper',function(){
   var buttonGroupArray = [];
-  buttonGroupArray.push({label:'taunts',class:'latesttaunt-button',match:'latesttaunt'})
-  buttonGroupArray.push({label:'responses',class:'latestresponses-button',match:'latestresponses'})
-  buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button',match:'latestdiscussion'})
+  buttonGroupArray.push({label:'taunts',class:'latesttaunt-button sortType-button',match:'latesttaunt'})
+  buttonGroupArray.push({label:'responses',class:'latestresponses-button sortType-button',match:'latestresponses'})
+  buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button sortType-button',match:'latestdiscussion'})
 
 
   var dataForHelper = {
@@ -119,14 +119,6 @@ addTemplateHelper('rootView','sortTypeDataHelper',function(){
 
 
   return dataForHelper;
-
-})
-
-addTemplateHelper('rootView','asdfasdf',function(){
-
-
-
-  return function(){console.log('asdfasdfasdf')};
 
 })
 
@@ -172,6 +164,13 @@ setTemplateEvents('sortFilterButtons',{
   },
   "click a": function (e, tmpl, x) {
     var $el = $(e.target)
+    if($el.hasClass('sortType-button')){
+      //TOGGLE DIRECTION OF SORT WHEN A PRE-SELECTED SORTTYPE BUTTON IS PRESSED     
+      if(this.parent.selected === this){
+        Session.set('sortDirection', Session.get('sortDirection') * -1);
+      }
+    }
+    
     if($el.hasClass('latestdiscussion-button')){
       Session.set('sortType', 'latestdiscussion');
     }
@@ -188,6 +187,9 @@ setTemplateEvents('sortFilterButtons',{
       Session.set('sortDirection', 1);
     }
     if($el.hasClass('resultsCount-button')){
+
+      
+
       Session.set('resultsCount', this.match);
 
 
