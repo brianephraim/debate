@@ -15,7 +15,9 @@ if(typeof Session.get('sortType') === 'undefined'){
 if(typeof Session.get('tagsIncludeArray') === 'undefined'){
   Session.set('tagsIncludeArray', []);
 }
-
+if(typeof Session.get('tagsExcludeArray') === 'undefined'){
+  Session.set('tagsExcludeArray', []);
+}
 
 Session.set('totalTaunts', 0);
 Session.set('totalPages',0)

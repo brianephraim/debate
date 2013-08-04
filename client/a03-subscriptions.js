@@ -4,7 +4,8 @@ Meteor.autosubscribe(function () {
     Session.get('resultsCount'),
     Session.get('sortDirection'),
     Session.get('sortType'),
-    Session.get('tagsIncludeArray')
+    Session.get('tagsIncludeArray'),
+    Session.get('tagsExcludeArray')
   );
 
   Meteor.subscribe('allUsers',null , function() { 

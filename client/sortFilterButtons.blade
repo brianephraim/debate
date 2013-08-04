@@ -1,9 +1,9 @@
 function renderButtonGroupManipulators(toGet,buttonGroupArray,smallSize,largeSize,extraClass,groupClass,headlineString)
  - var groupClassx = groupClass
  .row
-  .small-3.columns
-   label.right #{headlineString}
-  .small-9.columns
+  .small-1.columns
+   label #{headlineString}
+  .small-11.columns
    div(class="bladeEmptyClassBug #{groupClassx}")
     div.button-group
      foreach buttonGroupArray as sort
@@ -12,8 +12,8 @@ function renderButtonGroupManipulators(toGet,buttonGroupArray,smallSize,largeSiz
         .columns
          .row #{sort.label}
          .row
-          input(class="tagYes" type="checkbox")
-          input(class="tagNo" type="checkbox")
+          input(class="tagYes tagCheckbox" type="checkbox")
+          input(class="tagNo tagCheckbox" type="checkbox")
        -} else {
         - var selectedClass = ''
         - if(sort.match === Session.get(toGet)){
