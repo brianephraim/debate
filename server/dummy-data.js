@@ -9,7 +9,7 @@ setServerStartupItems(function(){
             datePosted: new Date(),
             tags: ['guns','politics','sucks']
           },
-          responses:[
+          avatarChat:[
             {
               bodyText:'No you suck No you suck No you suck No you suck No you suck No you suck No you suck No you suck',
               datePosted: new Date(),
@@ -21,9 +21,9 @@ setServerStartupItems(function(){
               avatar:'/avatars/moe.jpg'
             }
           ],
-          discussion:[
+          exposedChat:[
             {
-              bodyText:'This discussion is really heating up',
+              bodyText:'This exposedChat is really heating up',
               datePosted: new Date(),
               avatar:'/profilepics/brian.jpg',
               userId:'108334',
@@ -37,8 +37,8 @@ setServerStartupItems(function(){
               userName:'Richard'
             }
           ],
-          latestresponses:'zzz',
-          latestdiscussion:'zzz'
+          latestavatarChat:'zzz',
+          latestexposedChat:'zzz'
         },
         {
           taunt:{
@@ -46,7 +46,7 @@ setServerStartupItems(function(){
             datePosted: new Date(),
             tags: ['guns','politics','sucks']
           },
-          responses:[
+          avatarChat:[
             {
               bodyText:'No you suck',
               datePosted: new Date(),
@@ -58,9 +58,9 @@ setServerStartupItems(function(){
               avatar:'/avatars/moe.jpg'
             }
           ],
-          discussion:[
+          exposedChat:[
             {
-              bodyText:'This discussion is really heating up',
+              bodyText:'This exposedChat is really heating up',
               datePosted: new Date(),
               avatar:'/profilepics/andy.png',
               userId:'108334',
@@ -74,8 +74,8 @@ setServerStartupItems(function(){
               userName:'Richard'
             }
           ],
-          latestresponses:'zzz',
-          latestdiscussion:'zzz'
+          latestavatarChat:'zzz',
+          latestexposedChat:'zzz'
         }
      ]
      for (var i = 0; i < data.length; i++){

@@ -12,9 +12,9 @@ function datePostedFromNow(dateObj)
     call datePostedFromNow(dataItem.taunt.datePosted)
    p.tags #{dataItem.taunt.tags}
  .small-6.large-4.columns
-  .panel.responses.chat
-   h4 Responses
-   -var dataItemSegmentKey = 'responses';
+  .panel.avatarChat.chat
+   h4 avatarChat
+   -var dataItemSegmentKey = 'avatarChat';
    include 'listingFrame' exposing dataItem, datePostedFromNow, dataItemSegmentKey
    -if(userLoggedIn)
     -if(userSelectedAvatar)
@@ -25,9 +25,9 @@ function datePostedFromNow(dateObj)
    -else
     p You must be logged in to comment.
  .small-12.large-4.columns
-  .panel.discussions.chat
-   h4 Discussion
-   -var dataItemSegmentKey = 'discussion';
+  .panel.exposedChats.chat
+   h4 exposedChat
+   -var dataItemSegmentKey = 'exposedChat';
    include 'listingFrame' exposing dataItem, datePostedFromNow, dataItemSegmentKey
    -if(userLoggedIn)
     include 'basicInputForm' exposing dataItem, dataItemSegmentKey

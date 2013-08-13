@@ -102,8 +102,8 @@ addTemplateHelper('rootView','sortDirectionDataHelper',function(){
 addTemplateHelper('rootView','sortTypeDataHelper',function(){
   var buttonGroupArray = [];
   buttonGroupArray.push({label:'taunts',class:'latesttaunt-button sortType-button',match:'latesttaunt'})
-  buttonGroupArray.push({label:'responses',class:'latestresponses-button sortType-button',match:'latestresponses'})
-  buttonGroupArray.push({label:'discussion',class:'latestdiscussion-button sortType-button',match:'latestdiscussion'})
+  buttonGroupArray.push({label:'avatarChat',class:'latestavatarChat-button sortType-button',match:'latestavatarChat'})
+  buttonGroupArray.push({label:'exposedChat',class:'latestexposedChat-button sortType-button',match:'latestexposedChat'})
 
 
   var dataForHelper = {
@@ -171,11 +171,11 @@ setTemplateEvents('sortFilterButtons',{
       }
     }
     
-    if($el.hasClass('latestdiscussion-button')){
-      Session.set('sortType', 'latestdiscussion');
+    if($el.hasClass('latestexposedChat-button')){
+      Session.set('sortType', 'latestexposedChat');
     }
-    if($el.hasClass('latestresponses-button')){
-      Session.set('sortType', 'latestresponses');
+    if($el.hasClass('latestavatarChat-button')){
+      Session.set('sortType', 'latestavatarChat');
     }
     if($el.hasClass('latesttaunt-button')){
       Session.set('sortType', 'latesttaunt');

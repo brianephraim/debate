@@ -23,10 +23,10 @@ setTemplateEvents('tauntForm',{
         datePosted: new Date(),
         tags: tagsArray
       },
-      responses:[],
-      discussion:[],
-      latestresponses:'zzz',
-      latestdiscussion:'zzz'
+      avatarChat:[],
+      exposedChat:[],
+      latestavatarChat:'zzz',
+      latestexposedChat:'zzz'
     };
     console.log('insert')
     tauntColl.insert(newTaunt);

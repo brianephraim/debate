@@ -4,11 +4,11 @@ setTemplateEvents('basicInputForm',{
     var inputValue = $(e.target).closest('form').find('input').val();
     var itemId = this.dataItem._id;
     var updateTimeStampProperty = {};
-    if(self.dataItemSegmentKey === 'discussion'){
+    if(self.dataItemSegmentKey === 'exposedChat'){
       var picToPost = Meteor.user().profile.picture
       updateTimeStampProperty['latest'+self.dataItemSegmentKey] = new Date();
     }
-    if(self.dataItemSegmentKey === 'responses'){
+    if(self.dataItemSegmentKey === 'avatarChat'){
       var picToPost = Meteor.user().profile['avatar'+itemId]
       updateTimeStampProperty['latest'+self.dataItemSegmentKey] = new Date();
     }
