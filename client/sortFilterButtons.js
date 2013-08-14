@@ -1,3 +1,21 @@
+addTemplateHelper('rootView','resultsCountInputDataHelper',function(){
+  // var tagsArray = Template.rootView.tagsHelper();
+  // var buttonGroupArray = []
+  // var total = tagsArray.length;
+  // for(var i=0,l=total; i<l; i++){
+  //   buttonGroupArray.push({label:tagsArray[i].tag + ' ' + tagsArray[i].popularityTally,class:'tagsInclude-button',match:tagsArray[i]})
+  // }
+  var dataForHelper = {
+    class:'resultsCountInput',
+    buttonText:': P',
+    currentValue:Session.get('resultsCount')
+  }
+  return dataForHelper;
+})
+
+
+
+
 addTemplateHelper('rootView','tagsCloudDataHelper',function(){
   var tagsArray = Template.rootView.tagsHelper();
   var buttonGroupArray = []
@@ -124,9 +142,45 @@ addTemplateHelper('rootView','sortTypeDataHelper',function(){
 
 
 
+var fixTotalPages = function(){
+  var pages = Math.floor(Session.get('totalTaunts')/Session.get('resultsCount'))
+      var remainder = Session.get('totalTaunts')%Session.get('resultsCount')
+      remainder = remainder > 0 ? 1 : 0;
+      pages += remainder;
+      Session.set('totalPages',pages)
 
-
+      if(Session.get('page') > Session.get('totalPages')){
+        Session.set('page',Session.get('totalPages'))
+      }
+}
+//, 
 setTemplateEvents('sortFilterButtons',{
+  "keyup .resultsCountInput input": function (e, tmpl, x) {
+    console.log(e)
+    // var $el = $(e.target);
+    // var $input = $el.closest('.row').find('input');
+    // var inputValue = +$input.val();
+    // console.log(inputValue)
+    // Session.set('resultsCount', +inputValue);
+
+    // fixTotalPages()
+    
+  },
+  "click .resultsCountInput button": function (e, tmpl, x) {
+    console.log(e)
+    e.preventDefault();
+    var $el = $(e.target);
+    var $input = $el.closest('.row').find('input');
+    var inputValue = $input.val();
+    var inputValueDeLettered = +(inputValue.replace(/\D/g,''));
+    
+    inputValueDeLettered = inputValueDeLettered > 0 ? inputValueDeLettered : 1;
+    console.log(inputValueDeLettered)
+    Session.set('resultsCount', inputValueDeLettered);
+
+    fixTotalPages()
+    
+  },
   "click .tagCheckbox": function (e, tmpl, x) {
     //.tagCloud
 
@@ -194,16 +248,7 @@ setTemplateEvents('sortFilterButtons',{
 
 
 
-      var pages = Math.floor(Session.get('totalTaunts')/Session.get('resultsCount'))
-      var remainder = Session.get('totalTaunts')%Session.get('resultsCount')
-      remainder = remainder > 0 ? 1 : 0;
-      pages += remainder;
-      Session.set('totalPages',pages)
-
-      //If changing result count makes the current page disappear, set current page to last page.
-      if(Session.get('page') > Session.get('totalPages')){
-        Session.set('page',Session.get('totalPages'))
-      }
+      fixTotalPages()
 
 
     }

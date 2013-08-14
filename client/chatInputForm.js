@@ -1,3 +1,18 @@
+addTemplateHelper('chatInputForm','chatInputDataHelper',function(){
+  // var tagsArray = Template.rootView.tagsHelper();
+  // var buttonGroupArray = []
+  // var total = tagsArray.length;
+  // for(var i=0,l=total; i<l; i++){
+  //   buttonGroupArray.push({label:tagsArray[i].tag + ' ' + tagsArray[i].popularityTally,class:'tagsInclude-button',match:tagsArray[i]})
+  // }
+  var dataForHelper = {
+    class:'chatInput',
+    buttonText:'; D',
+    currentValue:''
+  }
+  return dataForHelper;
+})
+
 setTemplateEvents('chatInputForm',{
   "click button": function (e, tmpl, x) {
     var self = this;
