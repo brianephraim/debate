@@ -1,4 +1,4 @@
-setTemplateEvents('basicInputForm',{
+setTemplateEvents('chatInputForm',{
   "click button": function (e, tmpl, x) {
     var self = this;
     var inputValue = $(e.target).closest('form').find('input').val();

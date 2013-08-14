@@ -19,7 +19,7 @@ function datePostedFromNow(dateObj)
    -if(userLoggedIn)
     -if(userSelectedAvatar)
      include 'avatarSelectionCurrent'
-     include 'basicInputForm' exposing dataItem, dataItemSegmentKey
+     include 'chatInputForm' exposing dataItem, dataItemSegmentKey
     -else
      include 'avatarSelection'
    -else
@@ -30,6 +30,6 @@ function datePostedFromNow(dateObj)
    -var dataItemSegmentKey = 'exposedChat';
    include 'listingFrame' exposing dataItem, datePostedFromNow, dataItemSegmentKey
    -if(userLoggedIn)
-    include 'basicInputForm' exposing dataItem, dataItemSegmentKey
+    include 'chatInputForm' exposing dataItem, dataItemSegmentKey
    -else
     p You must be logged in to comment.
