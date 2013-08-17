@@ -8,18 +8,20 @@ function zxcv()
 
 .rootViewWrapperDebate
  != Template.loginTemplate({"optional_data_object":"goes here"})
- .mainContent.row.fixedHeader
-  .small-12.large-12.columns
-   .row
-    constant
+ .row
+  .small-3.columns
+   isolate
+    include 'sortFilterButtons'
+   .small-12.large-12.columns
+    .row
+     constant
+      .panel.tauntForm
+       include 'tauntForm'
+  .small-9.columns
+   .mainContent.row
+    isolate
+     include 'tauntList'
+   .footer.row
+    .small-12.large-12.columns
      .panel
-      include 'tauntForm'
-  isolate
-   include 'sortFilterButtons'
- .mainContent.row
-  isolate
-   include 'tauntList'
- .footer.row
-  .small-12.large-12.columns
-   .panel
-    h4 boomer.com
+      h4 boomer.com

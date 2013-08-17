@@ -26,9 +26,9 @@ addTemplateHelper('rootView','tagsCloudDataHelper',function(){
   var dataForHelper = {
     toGet:'resultsCount',
     buttonGroupArray:buttonGroupArray,
-    smallSize:1,
-    largeSize:1,
-    itemClass:'left no-margin',
+    smallSize:'void',
+    largeSize:'void',
+    itemClass:'item',
     groupClass:'panel tagCloud',
     headlineString:'tag cloud'
   }
@@ -51,7 +51,7 @@ addTemplateHelper('rootView','resultsCountDataHelper',function(){
     smallSize:1,
     largeSize:1,
     itemClass:'left no-margin',
-    groupClass:'panel',
+    groupClass:'panel button-group',
     headlineString:'Results per page'
   }
 
@@ -80,7 +80,7 @@ addTemplateHelper('rootView','pageNumberDataHelper',function(){
     smallSize:1,
     largeSize:1,
     itemClass:'left no-margin',
-    groupClass:'panel',
+    groupClass:'panel button-group',
     headlineString:'Page number'
   }
 
@@ -105,7 +105,7 @@ addTemplateHelper('rootView','sortDirectionDataHelper',function(){
     smallSize:6,
     largeSize:6,
     itemClass:'columns',
-    groupClass:'',
+    groupClass:'button-group',
     headlineString:'Sort direction'
   }
 
@@ -130,7 +130,7 @@ addTemplateHelper('rootView','sortTypeDataHelper',function(){
     smallSize:6,
     largeSize:4,
     itemClass:'columns',
-    groupClass:'',
+    groupClass:'button-group',
     headlineString:'Sort by'
   }
 

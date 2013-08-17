@@ -1,21 +1,20 @@
 - var ddddddd= 'ddddddd'
 function renderButtonGroupManipulators(settings)
  .row
-  .small-1.columns
+  .small-3.columns
    label #{settings.headlineString}
-  .small-11.columns
+  .small-9.columns
    div(class="bladeEmptyClassBug #{settings.groupClass}")
-    div.button-group
+    div
      - var parent = this;
      foreach settings.buttonGroupArray as buttonGroupItem
       - this.parent = parent;
       div(class="small-#{settings.smallSize} large-#{settings.largeSize} #{settings.itemClass}")
        -if(settings.groupClass.indexOf('tagCloud') > -1){
-        .columns
-         .row #{buttonGroupItem.label}
-         .row
-          input(class="tagYes tagCheckbox" type="checkbox")
-          input(class="tagNo tagCheckbox" type="checkbox")
+        .row #{buttonGroupItem.label}
+        .row
+         input(class="tagYes tagCheckbox" type="checkbox")
+         input(class="tagNo tagCheckbox" type="checkbox")
        -} else {
         - var selectedClass = ''
         - if(buttonGroupItem.match === Session.get(settings.toGet)){
