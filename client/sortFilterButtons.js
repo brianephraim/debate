@@ -1,3 +1,16 @@
+addTemplateHelper('rootView','rendered',function(e) {
+  //SET HEADER HEIGHT TO OFFSET SCROLL AREA
+  var $headerPieces = $(this.findAll('.headerPiece'));
+  var headerHeight = 0;
+  $headerPieces.each(function(){
+    headerHeight += $(this).outerHeight();
+  })
+  console.log(headerHeight)
+  Session.set('headerHeight',headerHeight)
+   
+})
+
+
 addTemplateHelper('rootView','resultsCountInputDataHelper',function(){
   // var tagsArray = Template.rootView.tagsHelper();
   // var buttonGroupArray = []
@@ -222,11 +235,15 @@ setTemplateEvents('sortFilterButtons',{
       //TOGGLE DIRECTION OF SORT WHEN A PRE-SELECTED SORTTYPE BUTTON IS PRESSED     
       if(this.parent.selected === this){
         Session.set('sortDirection', Session.get('sortDirection') * -1);
+      } else {
+        Session.set('sortDirection',-1)
       }
     }
     
     if($el.hasClass('latestexposedChat-button')){
       Session.set('sortType', 'latestexposedChat');
+
+      
     }
     if($el.hasClass('latestavatarChat-button')){
       Session.set('sortType', 'latestavatarChat');

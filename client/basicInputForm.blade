@@ -1,12 +1,11 @@
 function basicInputForm(dataHelper)
- - console.log('zxcv',dataHelper)
+ - //
  form(class="#{dataHelper.class}")
   .row.collapse
    label Input Label
   .row.collapse
    div(class="large-10 small-8 columns")
     input(type="text" placeholder="#{dataHelper.currentValue}")
-   
    div(class="large-2 small-3 columns")
-    button.postfix.button.expand #{dataHelper.buttonText}
+    button.button.expand #{dataHelper.buttonText}
     p #{dataHelper.currentValue}

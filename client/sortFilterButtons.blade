@@ -1,61 +1,48 @@
-- var ddddddd= 'ddddddd'
-function renderButtonGroupManipulators(settings)
+include 'renderButtonGroupManipulators'
+.small-12.large-9.columns.headerPiece
  .row
-  .small-3.columns
-   label #{settings.headlineString}
-  .small-9.columns
-   div(class="bladeEmptyClassBug #{settings.groupClass}")
-    div
-     - var parent = this;
-     foreach settings.buttonGroupArray as buttonGroupItem
-      - this.parent = parent;
-      div(class="small-#{settings.smallSize} large-#{settings.largeSize} #{settings.itemClass}")
-       -if(settings.groupClass.indexOf('tagCloud') > -1){
-        .row #{buttonGroupItem.label}
-        .row
-         input(class="tagYes tagCheckbox" type="checkbox")
-         input(class="tagNo tagCheckbox" type="checkbox")
-       -} else {
-        - var selectedClass = ''
-        - if(buttonGroupItem.match === Session.get(settings.toGet)){
-         - selectedClass = 'success'
-         - this.parent.selected = this;
-        - }
-        a(class="expand small button #{buttonGroupItem.class} #{selectedClass}") #{buttonGroupItem.label}
-       -}
-
-
-call renderButtonGroupManipulators(tagsCloudDataHelper)
-
-call renderButtonGroupManipulators(resultsCountDataHelper)
-
-call renderButtonGroupManipulators(pageNumberDataHelper)
-
-.row
- .small-3.columns
- .small-9.columns
-  strong Page: 
-  span #{Session.get('page')}, 
-  strong Results Count: 
-  span #{Session.get('resultsCount')}, 
-  strong Direction: 
-  span #{Session.get('sortDirection')}, 
-  strong Type: 
-  span #{Session.get('sortType')}
-  strong Total Taunts: 
-  span #{totalTauntsHelper}
-
-
-
-call renderButtonGroupManipulators(sortDirectionDataHelper)
-
-call renderButtonGroupManipulators(sortTypeDataHelper)
-
-
-.row
- .small-2.columns
-  p asdfasdfasdfasdfa
   div
-   include 'basicInputForm'
-   call basicInputForm(resultsCountInputDataHelper)
- .small-9.columns
+   .panel.tauntForm
+    include 'tauntForm'
+ isolate
+  include 'renderButtonGroupManipulators'
+  call renderButtonGroupManipulators(sortDirectionDataHelper)
+  call renderButtonGroupManipulators(sortTypeDataHelper)
+
+isolate
+ .small-3.columns.sideCol
+  .row
+   .small-3.columns
+   .small-9.columns
+    strong Page: 
+    span #{Session.get('page')}, 
+    strong Results Count: 
+    span #{Session.get('resultsCount')}, 
+    strong Direction: 
+    span #{Session.get('sortDirection')}, 
+    strong Type: 
+    span #{Session.get('sortType')}
+    strong Total Taunts: 
+    span #{totalTauntsHelper}
+  .row
+   .small-2.columns
+    p asdfasdfasdfasdfa
+    div
+     include 'basicInputForm'
+     call basicInputForm(resultsCountInputDataHelper)
+   .small-9.columns
+
+  call renderButtonGroupManipulators(tagsCloudDataHelper)
+
+  call renderButtonGroupManipulators(resultsCountDataHelper)
+
+  call renderButtonGroupManipulators(pageNumberDataHelper)
+
+  
+
+
+ .small-9.columns.headerPiece
+  p asdfjrtejrg
+
+
+

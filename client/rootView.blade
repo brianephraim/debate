@@ -8,15 +8,11 @@ function zxcv()
 
 .rootViewWrapperDebate
  != Template.loginTemplate({"optional_data_object":"goes here"})
- .row
+ include 'sortFilterButtons'
+
+ div(class="row" style="padding-top:#{Session.get('headerHeight')}px")
   .small-3.columns
-   isolate
-    include 'sortFilterButtons'
-   .small-12.large-12.columns
-    .row
-     constant
-      .panel.tauntForm
-       include 'tauntForm'
+   p blank
   .small-9.columns
    .mainContent.row
     isolate

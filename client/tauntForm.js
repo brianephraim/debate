@@ -1,18 +1,21 @@
 addTemplateHelper('tauntForm','rendered',function(e) {
+ 
   var self = this
   var $frame = $(self.lastNode);
   if(typeof this.alreadyRendered === 'undefined'){
     this.alreadyRendered = true;
-    $frame.find('.tagsInput').tagsInput({
+    asdf  = $frame.find('.tagsInput').tagsInput({
       width:'auto',
       height:'auto'
     });
+
+    console.log(asdf.length)
   } 
 })
 
-setTemplateEvents('tauntForm',{ 
+
+setTemplateEvents('tauntForm',{
   "click button": function (e, tmpl, x) {
-    console.log('asdfhfhfhfhfhfhf')
     var self = this;
     var tauntValue = $(e.target).closest('form').find('.tauntInput').val();
     var tagsArray = $(e.target).closest('form').find('.tagsInput').val().split(',');

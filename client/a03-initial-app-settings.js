@@ -1,4 +1,4 @@
-
+Session.set('headerHeight',0)
 
 if(typeof Session.get('listRefresh') === 'undefined'){
   Session.set('listRefresh', {});
