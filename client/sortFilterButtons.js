@@ -1,3 +1,26 @@
+addTemplateHelper('sortFilterButtons','rendered',function(e) {
+  var self = this
+  var $frame = $(self.lastNode);
+  if(typeof this.alreadyRendered === 'undefined'){
+    this.alreadyRendered = true;
+  }
+
+  //TAG CLOUD HEIGHT
+  var $tagCloud = $frame.find('.tagCloud');
+  var $tagCloudTop = $tagCloud.offset().top;
+  var windowHeight = $(window).height();
+
+  var scrollContainerHeight = (windowHeight - $tagCloudTop) -10;
+  console.log(scrollContainerHeight)
+  $tagCloud.outerHeight(scrollContainerHeight)
+  
+  var chunk = $('<div style="z-index:9999999;position:absolute;background:red;top:0;left:0;width:100px;height:100px;"></div>')
+  $('body').append(chunk)
+  chunk.height((windowHeight - $tagCloudTop) -10)
+  chunk.css('top',$tagCloud.offset().top+'px')
+})
+
+
 addTemplateHelper('rootView','rendered',function(e) {
   //SET HEADER HEIGHT TO OFFSET SCROLL AREA
   var $headerPieces = $(this.findAll('.headerPiece'));
@@ -5,7 +28,6 @@ addTemplateHelper('rootView','rendered',function(e) {
   $headerPieces.each(function(){
     headerHeight += $(this).outerHeight();
   })
-  console.log(headerHeight)
   Session.set('headerHeight',headerHeight)
    
 })
