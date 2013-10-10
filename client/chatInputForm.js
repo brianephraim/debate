@@ -8,6 +8,7 @@ addTemplateHelper('chatInputForm','chatInputDataHelper',function(){
   var dataForHelper = {
     class:'chatInput',
     buttonText:'; D',
+    label:'chat input',
     currentValue:''
   }
   return dataForHelper;

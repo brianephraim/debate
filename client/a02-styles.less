@@ -450,7 +450,7 @@
 
 .row{max-width:none;}
 
-.tagCloud{overflow:scroll;}
+.tagCloud{overflow-y:scroll;height:50%;}
 .tagCloud .item {padding-bottom:20px;}
 
 .tauntForm{}
@@ -461,6 +461,11 @@
     width: 75%;
     right:0;
     z-index:2;
+    max-height:25%;
+    overflow:scroll;
+    background:#ddd;
+    top:0;
+    border-bottom:1em solid #5da423;
 }
 #login-buttons{
     z-index:3;
@@ -472,5 +477,32 @@
     width:25%;
     position:fixed;
     z-index:999;
-
+    border-right: 1em solid #5da423;
+    top: 0;
+    background:#ddd;
+    height:100%;
 }
+
+.bottomPiece{
+    position:fixed;
+    bottom:0;
+    right:0;
+    z-index:999;
+    max-height:25%;
+    overflow:scroll;
+    background:#ddd;
+    border-top:1em solid #5da423;
+    border-left:1em solid #5da423;
+}
+
+.scrollInnerContent{
+    background:#ddd;
+}
+
+.columns{
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+    borderx:1px solid black;
+}
+
+.button.expand.sortType-button{padding:0;}

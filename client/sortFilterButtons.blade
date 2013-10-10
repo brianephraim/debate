@@ -1,16 +1,17 @@
 include 'renderButtonGroupManipulators'
 .small-12.large-9.columns.headerPiece
- .row
-  div
-   .panel.tauntForm
-    include 'tauntForm'
- isolate
-  include 'renderButtonGroupManipulators'
-  call renderButtonGroupManipulators(sortDirectionDataHelper)
-  call renderButtonGroupManipulators(sortTypeDataHelper)
+ .scrollInnerContent
+  .row
+   div
+    .panel.tauntForm
+     include 'tauntForm'
+  isolate
+   call renderButtonGroupManipulators(sortDirectionDataHelper)
+   call renderButtonGroupManipulators(sortTypeDataHelper)
 
 isolate
  .small-3.columns.sideCol
+  call renderButtonGroupManipulators(tagsCloudDataHelper)
   .row
    .small-3.columns
    .small-9.columns
@@ -25,19 +26,19 @@ isolate
     strong Total Taunts: 
     span #{totalTauntsHelper}
   .row
-   .small-2.columns
+   .small-6.columns
     p asdfasdfasdfasdfa
     div
      include 'basicInputForm'
      call basicInputForm(resultsCountInputDataHelper)
-   .small-9.columns
-
-  call renderButtonGroupManipulators(tagsCloudDataHelper)
-
-  call renderButtonGroupManipulators(resultsCountDataHelper)
-
-  call renderButtonGroupManipulators(pageNumberDataHelper)
+   .small-6.columns
 
   
 
+  
+
+ .small-6.columns.bottomPiece
+  call renderButtonGroupManipulators(resultsCountDataHelper)
+
+  call renderButtonGroupManipulators(pageNumberDataHelper)
 

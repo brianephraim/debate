@@ -1,23 +1,32 @@
 addTemplateHelper('sortFilterButtons','rendered',function(e) {
   var self = this
-  var $frame = $(self.lastNode);
+  zxcv = self;
   if(typeof this.alreadyRendered === 'undefined'){
     this.alreadyRendered = true;
   }
 
   //TAG CLOUD HEIGHT
-  var $tagCloud = $frame.find('.tagCloud');
-  var $tagCloudTop = $tagCloud.offset().top;
-  var windowHeight = $(window).height();
+  $(document).ready(function() {
+    var $tagCloud = $(self.find('.tagCloud'));
+    var $tagCloudTop = $tagCloud.offset().top;
+    var windowHeight = $(window).height();
 
-  var scrollContainerHeight = (windowHeight - $tagCloudTop) -10;
-  console.log(scrollContainerHeight)
-  $tagCloud.outerHeight(scrollContainerHeight)
+    //SIZE IT TO REST-OF-VERTICAL-SCREEN-TO-TOUCH-THE-BOTTOM
+    // var scrollContainerHeight = (windowHeight - $tagCloudTop);
+    // console.log(scrollContainerHeight)
+    // $tagCloud.outerHeight(scrollContainerHeight)
+
+    //SIZE IT TO 50%
+    var scrollContainerHeight = (windowHeight/2 - $tagCloudTop);
+    $tagCloud.outerHeight(scrollContainerHeight)
+    
+    // var chunk = $('<div style="z-index:9999999;position:absolute;background:red;top:0;left:0;width:100px;height:100px;"></div>')
+    // $('body').append(chunk)
+    // chunk.height((windowHeight - $tagCloudTop))
+    // chunk.css('top',$tagCloud.offset().top+'px')
+
+  });
   
-  var chunk = $('<div style="z-index:9999999;position:absolute;background:red;top:0;left:0;width:100px;height:100px;"></div>')
-  $('body').append(chunk)
-  chunk.height((windowHeight - $tagCloudTop) -10)
-  chunk.css('top',$tagCloud.offset().top+'px')
 })
 
 
@@ -43,7 +52,8 @@ addTemplateHelper('rootView','resultsCountInputDataHelper',function(){
   var dataForHelper = {
     class:'resultsCountInput',
     buttonText:': P',
-    currentValue:Session.get('resultsCount')
+    currentValue:Session.get('resultsCount'),
+    label:"# of results"
   }
   return dataForHelper;
 })
