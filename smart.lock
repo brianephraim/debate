@@ -2,7 +2,7 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "9bb2b5447e845c4f483df5e9b42a2c1de5ab909b"
+    "commit": "2e78d0d110443ac6fb9471e6be1c136f15f03fd2"
   },
   "dependencies": {
     "basePackages": {
@@ -16,8 +16,8 @@
     "packages": {
       "blade": {
         "git": "https://github.com/bminer/meteor-blade.git",
-        "tag": "v3.2.6meteor1",
-        "commit": "f0810fd031781c84a9b5a14fd84c5b9d060ab336"
+        "tag": "v3.2.6meteor2",
+        "commit": "28a9f9bf121c3410ab70138ba39862468bfe836b"
       },
       "meteor-foundation": {
         "git": "https://github.com/rubyblackbelt/meteor-foundation",
@@ -25,9 +25,9 @@
         "commit": "761d14fb95ee9e884d7ffe1b7bf7098c79426c6e"
       },
       "moment": {
-        "git": "https://github.com/possibilities/meteor-moment.git",
-        "tag": "v1.7.0",
-        "commit": "c64b6ec0e714b9556f4b6643d430b868ba69d3d7"
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.2.1",
+        "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
       }
     }
   }
